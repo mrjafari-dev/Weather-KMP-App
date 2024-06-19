@@ -71,6 +71,8 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.coil.compose)
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
+            implementation("org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
+
 
         }
         desktopMain.dependencies {
