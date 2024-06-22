@@ -8,5 +8,5 @@ import model.RequestModel
 import model.ResponseModel
 
 interface PostService {
-    suspend fun getPosts(requestModel: RequestModel) : HttpResponse
+    suspend fun getPosts(requestModel: RequestModel , onSuccess:(ResponseModel)->Unit, onFail:(String)->Unit)
 }

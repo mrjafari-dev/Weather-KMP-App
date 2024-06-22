@@ -17,8 +17,12 @@ class AppViewModel : ViewModel() {
     val weatherViewState: StateFlow<MainViewState<ResponseModel>?> = _weatherViewState.asStateFlow() // Use StateFlow for read-only access
 
     suspend fun getWeather(requestModel: RequestModel) {
-        _weatherViewState.update { MainViewState.LoadingState() } // Update flow with state change
-        val response = postServiceImp.getPosts(requestModel).body<ResponseModel>()
-        _weatherViewState.update { MainViewState.DataLoadedState(response) } // Update flow with data
+        _weatherViewState.value = MainViewState.LoadingState() // Update flow with state change
+         postServiceImp.getPosts(requestModel, onSuccess = {
+             _weatherViewState.value =  MainViewState.DataLoadedState(it)
+         }, onFail = {
+             _weatherViewState.value =  MainViewState.ErrorState(it)
+         })
+         // Update flow with data
     }
 }

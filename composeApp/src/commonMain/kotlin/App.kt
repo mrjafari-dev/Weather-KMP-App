@@ -23,7 +23,6 @@ import weatherapp.composeapp.generated.resources.compose_multiplatform
 fun App() {
     MaterialTheme {
 
-        val client = HttpClient()
         val viewModel : AppViewModel = viewModel{AppViewModel()}
         val viewState = viewModel.weatherViewState.collectAsState().value
         val requestModel = RequestModel(country = "IR", city = "tehran")
@@ -46,13 +45,9 @@ fun App() {
                     Text("Error fetching weather data")
                 }
             }
-            Button(onClick = {
-                bottomSheetViewState = !bottomSheetViewState
-            }){
-                Text("Click")
-            }
+
             if (bottomSheetViewState){
-                Flexi
+
 
 
             }
