@@ -3,10 +3,9 @@ package remote
 import io.ktor.client.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import kotlinx.serialization.json.Json
 import model.RequestModel
-import model.ResponseModel
+import model.WeatherResponse
 
 interface PostService {
-    suspend fun getPosts(requestModel: RequestModel , onSuccess:(ResponseModel)->Unit, onFail:(String)->Unit)
+    suspend fun getPosts(requestModel: RequestModel , onSuccess:(WeatherResponse)->Unit, onFail:(String)->Unit)
 }

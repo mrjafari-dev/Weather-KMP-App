@@ -7,29 +7,34 @@ import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import model.RequestModel
-import model.ResponseModel
 import kotlinx.serialization.json.Json
+import model.WeatherResponse
 
 class PostServiceImp(private var client: HttpClient) : PostService {
-    override suspend fun getPosts(requestModel: RequestModel, onSuccess: (ResponseModel) -> Unit, onFail: (String) -> Unit) {
+    override suspend fun getPosts(requestModel: RequestModel, onSuccess: (WeatherResponse) -> Unit, onFail: (String) -> Unit) {
         try {
-            val response = client.post(ApiRouts.CityDetails){
+            val response = client.post(ApiRouts.CityDetails) {
                 FormDataContent(Parameters.build {
-                    parameter("key", "f24c70ecf7e740b0b51ebf6ff3097ec6os")
-                    parameter("country", requestModel.country)
-                    parameter("city", requestModel.city)
+                    parameter("key", "dacb861900974263ad863809242306")
+                    parameter("q", requestModel.city)
                 })
             }
-            if (response.status.isSuccess()){
-                println("Success".plus(response.body<ResponseModel>().toString()) )
+
+            if (response.status.isSuccess()) {
+                val responseBody: String = response.bodyAsText()
+                println("Success: $responseBody")
+
                 val json = Json { ignoreUnknownKeys = true }
-                val jsonToModel  = json.decodeFromString<ResponseModel>(response.body())
+                val jsonToModel = json.decodeFromString<WeatherResponse>(responseBody)
+
                 onSuccess(jsonToModel)
-            }else{
+            } else {
+                println("WRONG")
                 onFail("wrong in parameters")
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
             onFail(e.message.toString())
+            println("WRONG CATCH ${e.message.toString()}")
         }
 
 

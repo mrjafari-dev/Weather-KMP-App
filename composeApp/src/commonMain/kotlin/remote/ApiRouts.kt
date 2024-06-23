@@ -1,6 +1,6 @@
 package remote
 
 object ApiRouts {
-    private const val BASE_URL = "https://api.weatherbit.io/v2.0"
-    const val CityDetails = "$BASE_URL/current"
+    private const val BASE_URL = "http://api.weatherapi.com/v1"
+    const val CityDetails = "$BASE_URL/current.json"
 }

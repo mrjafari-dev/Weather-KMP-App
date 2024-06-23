@@ -1,9 +1,10 @@
 package model
+
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Weather(
-    val code: Int,
+data class Condition(
+    val text: String,
     val icon: String,
-    val description: String
+    val code: Int
 )
