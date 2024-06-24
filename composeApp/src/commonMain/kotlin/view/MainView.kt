@@ -17,18 +17,16 @@ fun MainView(appViewModel: AppViewModel){
 
 @Composable
 fun TemperoryPackView(appViewModel: AppViewModel , weatherResponse: WeatherResponse){
-    Row {
+    Row(modifier = Modifier.fillMaxWidth().padding(top = 20.dp), horizontalArrangement = Arrangement.Start) {
         AsyncImage(modifier = Modifier
-            .size(250.dp)
+            .size(200.dp)
             .padding(16.dp),
             model = "https://".plus(weatherResponse.current.condition.icon.removePrefix("//")),
             contentDescription = null)
         Column(modifier = Modifier.padding(start = 10.dp)) {
-            Text(weatherResponse.current.temp_c.toString().plus("C") , fontSize = 68.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            Text("${weatherResponse.location.country} / ${weatherResponse.location.name}" , fontSize = 68.sp)
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(appViewModel.getWeatherMessage(weatherResponse.current.temp_c), fontSize = 68.sp)
+            Text(weatherResponse.current.temp_c.toString().plus("C") , fontSize = 48.sp)
+            Text("${weatherResponse.location.country} / ${weatherResponse.location.name}" , fontSize = 12.sp)
+            Text(appViewModel.getWeatherMessage(weatherResponse.current.temp_c), fontSize = 12.sp)
 
         }
     }
