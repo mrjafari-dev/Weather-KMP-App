@@ -10,7 +10,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import model.RequestModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import view.MainLoading
 import view.SearchBox
+import view.ShimmerLoader
+import view.TemperoryPackView
 import viewModel.AppViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -26,9 +29,9 @@ fun App() {
 
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val widthFraction = when {
-                maxWidth > 600.dp -> 0.5f // Desktop
-                maxWidth > 400.dp -> 0.5f // Tablet
-                else -> 1f // Mobile
+                maxWidth > 600.dp -> 0.4f // Desktop
+                maxWidth > 400.dp -> 0.8f // Tablet
+                else -> 0.9f // Mobile
             }
             Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
                 Column(modifier = Modifier.fillMaxWidth(widthFraction).padding(top = 10.dp), horizontalAlignment = Alignment.CenterHorizontally) {
@@ -41,19 +44,16 @@ fun App() {
                     when (viewState) {
                         is MainViewState.LoadingState -> {
                             // Show loading indicator
-                            Text("Loading weather data...")
+                            MainLoading()
                         }
                         is MainViewState.DataLoadedState -> {
                             val weatherData = viewState.data
                             // Display weather information using weatherData
-                            Text("City: ${weatherData.current}")
+                         /*   Text("City: ${weatherData.current}")
                             Text("Temperature: ${weatherData.location}")
-                            println("https://".plus(weatherData.current.condition.icon.removePrefix("//")))
-                            AsyncImage(modifier = Modifier
-                                .size(250.dp)
-                                .padding(16.dp),
-                                model = "https://".plus(weatherData.current.condition.icon.removePrefix("//")),
-                                contentDescription = null)
+                            println("https:".plus(weatherData.current.condition.icon))
+                            */
+                            TemperoryPackView(viewModel,weatherData)
                             // ... display other weather details
                         }
                         else -> {

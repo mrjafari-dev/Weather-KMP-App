@@ -16,8 +16,7 @@ import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import weatherapp.composeapp.generated.resources.Res
-import weatherapp.composeapp.generated.resources.compose_multiplatform
-import weatherapp.composeapp.generated.resources.search
+
 
 
 @Composable
@@ -43,11 +42,11 @@ fun SearchBox(onClick: (String) -> Unit) {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Image(
-                        painter = painterResource(Res.drawable.search),
+                 /*   Image(
+                        painter = painterResource(Res.drawable.),
                         contentDescription = null,
                         modifier = Modifier.size(15.dp)
-                    )
+                    )*/
                 }
             }
         }
