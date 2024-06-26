@@ -1,19 +1,16 @@
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil3.compose.AsyncImage
 import model.RequestModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import view.MainLoading
 import view.SearchBox
-import view.ShimmerLoader
-import view.TemperoryPackView
+import view.DisplayWeatherInfo
+import view.MainView
 import viewModel.AppViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -29,7 +26,7 @@ fun App() {
 
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val widthFraction = when {
-                maxWidth > 600.dp -> 0.4f // Desktop
+                maxWidth > 600.dp -> 0.6f // Desktop
                 maxWidth > 400.dp -> 0.8f // Tablet
                 else -> 0.9f // Mobile
             }
@@ -43,21 +40,13 @@ fun App() {
                     }
                     when (viewState) {
                         is MainViewState.LoadingState -> {
-                            // Show loading indicator
                             MainLoading()
                         }
                         is MainViewState.DataLoadedState -> {
                             val weatherData = viewState.data
-                            // Display weather information using weatherData
-                         /*   Text("City: ${weatherData.current}")
-                            Text("Temperature: ${weatherData.location}")
-                            println("https:".plus(weatherData.current.condition.icon))
-                            */
-                            TemperoryPackView(viewModel,weatherData)
-                            // ... display other weather details
+                            MainView(viewModel,weatherData)
                         }
                         else -> {
-                            // Handle potential error state
                             Text("Error fetching weather data")
                         }
                     }

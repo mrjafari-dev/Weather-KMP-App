@@ -43,4 +43,6 @@ class AppViewModel : ViewModel() {
             else -> "🔥 Heat wave alert! Ice cream is officially a food group today!"
         }
     }
+
+
 }
