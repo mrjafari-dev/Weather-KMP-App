@@ -1,6 +1,8 @@
 package view
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -10,7 +12,8 @@ import androidx.compose.ui.unit.dp
 fun MainLoading(){
    Column(modifier = Modifier.padding(top = 50.dp)) {
        DisplayWeatherInfoLoading()
-
+       Spacer(modifier = Modifier.height(10.dp))
+       DisplayWeatherDetailLoading()
    }
 }
 @Composable
@@ -26,4 +29,14 @@ fun DisplayWeatherInfoLoading(){
         }
     }
 
+}
+
+@Composable
+fun DisplayWeatherDetailLoading(){
+    LazyRow {
+        items(3){
+            ShimmerLoader(modifier = Modifier.height(100.dp).width(140.dp))
+
+        }
+    }
 }

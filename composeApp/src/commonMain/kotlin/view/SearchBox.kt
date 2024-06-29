@@ -26,10 +26,10 @@ import weatherapp.composeapp.generated.resources.search
 @Composable
 fun SearchBox(onClick: (String) -> Unit) {
     var searchValue by remember {
-        mutableStateOf("")
+        mutableStateOf("Tehran")
     }
-    Card(elevation = 5.dp, modifier = Modifier.height(45.dp), shape = RoundedCornerShape(50.dp)) {
-       
+    Card(elevation = 5.dp, modifier = Modifier.height(55.dp), shape = RoundedCornerShape(50.dp)) {
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -43,7 +43,7 @@ fun SearchBox(onClick: (String) -> Unit) {
             Card(
                 backgroundColor = Color.Black,
                 shape = RoundedCornerShape(20.dp),
-                modifier = Modifier.size(35.dp).clickable {
+                modifier = Modifier.size(45.dp).clickable {
                     onClick(searchValue)
                 }
                     .size(70.dp)

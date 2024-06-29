@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import model.RequestModel
 import model.WeatherResponse
 import remote.PostServiceImp
+import kotlin.math.log
 
 class AppViewModel : ViewModel() {
     private val postServiceImp = PostServiceImp(HttpClient())
@@ -20,9 +21,11 @@ class AppViewModel : ViewModel() {
     suspend fun getWeather(requestModel: RequestModel) {
         _weatherViewState.value = MainViewState.LoadingState() // Update flow with state change
          postServiceImp.getPosts(requestModel, onSuccess = {
+             println("testdsfs".plus(it.toString()))
              _weatherViewState.value = MainViewState.DataLoadedState(it)
 
          }, onFail = {
+             println("testdsfs".plus(it.toString()))
              _weatherViewState.value = MainViewState.ErrorState(it)
          })
          // Update flow with data

@@ -23,10 +23,13 @@ fun App() {
         val viewState = viewModel.weatherViewState.collectAsState().value
         val requestModel = RequestModel(country = "IR", city = "tehran")
 
+        LaunchedEffect(true){
+            viewModel.fetchData(requestModel)
+        }
 
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             val widthFraction = when {
-                maxWidth > 600.dp -> 0.6f // Desktop
+                maxWidth > 600.dp -> 0.5f // Desktop
                 maxWidth > 400.dp -> 0.8f // Tablet
                 else -> 0.9f // Mobile
             }
@@ -45,9 +48,13 @@ fun App() {
                         is MainViewState.DataLoadedState -> {
                             val weatherData = viewState.data
                             MainView(viewModel,weatherData)
+
                         }
-                        else -> {
+                        is MainViewState.ErrorState -> {
                             Text("Error fetching weather data")
+                        }
+                        else->{
+
                         }
                     }
 
@@ -58,11 +65,5 @@ fun App() {
 
 
         }
-
-
-
-
-
-
     }
 }
